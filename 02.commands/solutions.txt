@@ -1,13 +1,13 @@
-##02-a-0100
+02-a-0100
 mkdir my_passwd
 cp /etc/passwd my_passwd
 
-##02-a-0500
+02-a-0500
 mkdir -p practice-test/test1
 cd practice-test/test1/
 mv ../../test.txt .
 
-##02-a-0600
+02-a-0600
 mkdir -p practice/01/
 touch practice/01/f1 practice/01/f2 practice/01/f3
 mkdir dir1
@@ -15,7 +15,7 @@ cp practice/01/f1 dir1/
 cp practice/01/f2 dir1/
 cp practice/01/f3 dir1/
 
-##02-a-0601
+02-a-0601
 mkdir dir2
 mv practice/01/f2 dir2/numbers
 
