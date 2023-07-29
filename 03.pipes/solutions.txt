@@ -1,0 +1,212 @@
+03-a-0200
+cat /etc/passwd | sort -t ':' -k 3
+
+03-a-0201
+cat /etc/passwd | sort -t ':' -n -k 3
+
+03-a-0210
+cat /etc/passwd | cut -d ':' -f 1,5
+
+03-a-0211
+cut -c 2-6 < /etc/passwd
+
+03-a-0212
+cut -d ':' -f 1,6 < /etc/passwd
+
+03-a-0213
+cut -d '/' -f 2 < /etc/passwd
+
+03-a-1500
+wc -c /etc/passwd
+wc -m /etc/passwd
+wc -l /etc/passwd
+
+03-a-2000
+head -n 12 /etc/passwd
+printf "$(head -c 26 /etc/passwd)\n"
+head -n -5 /etc/passwd
+tail -n 17
+head -151 /etc/passwd | tail +151            //  sed -n '151p' /etc/passwd
+sed -n '13p' /etc/passwd | tail -c 5   
+
+03-a-3000
+df -P > dfFile
+tail +2 dfFile | tr -s ' ' | sort -t ' ' -n -k 2
+
+03-a-3100
+cat /etc/passwd | cut -d ':' -f 1 > users
+
+03-a-3500
+cat /etc/passwd | cut -d ':' -f 1 | tr [a-z] [A-Z]
+
+03-a-5000
+grep -n 'Божидар Абаджиев' /etc/passwd
+grep -B 2 -A 3 'Божидар Абаджиев' /etc/passwd
+grep -B 2 -A2 'Божидар Абаджиев' /etc/passwd | egrep '(s0600004|s0600132)'
+
+03-a-5001
+grep -v '/bin/bash' /etc/passwd | wc -l
+
+03-a-5002
+cut -d ':' -f 5 /etc/passwd | cut -d ' ' -f 2 | cut -d ',' -f 1 | grep '???????*'    // понеже е кирилица нищо не се извежда
+
+03-a-5003
+awk -F ':' '{print $5}' /etc/passwd | awk '{print $2}' | awk -F ',' '{print $1}' | awk '$1 ~ /^(.){,7}$/'
+///////OR
+cat /etc/passwd | cut -d ':' -f 5 | egrep --color "\s+[^\s,]{,7}[,:]" | cut -d, -f1
+
+03-a-5004
+cat /etc/passwd | egrep –color “\s+[^\s,]{,7}[,:]”
+
+03-a-6000
+cp /srv/fmi-os/exercises/data/emp.data ~
+cat emp.data | awk ‘{if(NR==3)print $0}’
+cat emp.data | awk ‘{print $NF}’
+cat emp.data | awk '{if(NF>4) print $0}'
+cat emp.data | awk '{if($NF>4) print $0}'
+cat emp.data | awk '{ print $0}'
+cat emp.data | awk ‘BEGIN {count=0} /Beth/ {count+=1} END {print count}’
+ cat emp.data | awk 'BEGIN {max =0; line = " "} {if($3 > max){max=$3; line=$0}} END {print max, line}'
+cat emp.data | awk ‘/^.{18,}$/{print $0}’
+cat emp.data | awk '{print $2,$1}'
+cat emp.data | awk 'BEGIN {temp=" "; count = 0} {temp=$1; $1=$2; $2=temp; print $0}'
+cat emp.data | awk '{$2=”\t”; print $0}'
+
+03-b-0300
+cat /etc/passwd | awk -F : ‘$1 == “s0600004” {print $4}’                                 //   cat my_passwd | grep “^$(whoami):” | cut -d : -f 4
+
+03-b-3400
+cat /etc/services | grep '#' | wc -l
+
+03-b-3500
+file  /bin/* | grep ‘shell script’ | wc -l
+file  /bin/* | grep ‘shell script, ASCII text’ | wc -l
+
+03-b-3600
+find / -maxdepth 3 -not -readable -type d 2>/dev/null
+
+03-b-4000
+mkdir dir5
+cd dir5
+vim file1
+vim file2
+vim file3
+printf ‘symbols: %d lines: %d\n’ $(wc -c < dir5/file1) $(wc -l < dir5/file1)    //
+echo “symbols: $(wc -c < dir5/file1) lines: $(wc -l < dir5/file1)”   //
+wc dir5/*
+cat dir5/* | wc -l
+
+03-b-4001
+sed -i -r 's/(.*)/\U\1/g' file2
+
+03-b-4002
+sed -i -r 's/(1)//g' dir5/file3
+
+03-b-4003
+touch file4
+cat file1 file2 file3 >> file4
+cat file4 | sort | uniq -c | sort -rn -k1 | awk '{print $1" "$2}'
+
+03-b-4004
+touch file99
+cat file1 file2 file3 >> file99
+
+03-b-4005
+cat file2 | sed -r 's/(.)/\L\1/g' > file1
+
+03-b-5200
+cat mypasswd | sed ‘/s/a/””/g’ | wc -m
+////////or
+cat /etc/passwd | grep -o . | grep -v 'a' | awk 'END {print NR}'
+
+03-b-5300
+cat /etc/passwd | cut -d: -f 5 | awk -F, '{print $1}' | grep -o . | sort | uniq -c | wc -l
+
+03-b-5400
+cat /etc/passwd | grep -v 'ов'
+
+03-b-6100
+cat /etc/passwd |head -n 48 |tail -n28 | awk -F ‘;’ ‘{print $3}’ | grep -o .$
+///////////////////////
+cat /etc/passwd |head -n 48 |tail -n28 | awk -F ‘;’ ‘{print $3}’ | sed -E ‘s/.*(.$)/\1/g’
+
+03-b-6700
+fint /tmp -type f -readable -printf "%p %m" 2>/dev/null
+
+03-b-6900
+find . -type f -printf "%Ad %f\n" | sort -n  | head -n 10
+
+03-b-7000
+find /usr/include -type f -printf "%p\n" | egrep '(.\.c$|.\.h$)' | xargs wc -l
+
+03-b-7500
+egrep -i -o '\>[^ ]+\<' /etc/services | sed 's/\t/\n/g' | grep -v "^$" | sort | uniq -c | sort -nr | head -n10
+
+03-b-8000
+cp <(grep '/home/SI' /srv/fmi-os/exercises/data/mypasswd.txt | uniq | grep '^s.*' | awk -F: '{print $1}') si.txt
+
+03-b-8500
+cat /etc/group | awk -F: '{print $1}' | sort | uniq | awk '{if ($0=="students") print "Hello, "$1" - I, am here!"; else print "Hello, "$1" "}'
+
+03-b-8600
+find /usr -type f -name '*.sh' | xargs grep '^#!.*' | awk -F: '{print $2}' | sort | uniq -c | sort -nr | head -1
+
+03-b-8700
+cat /etc/passwd | cut -d : -f 4 | sort -n | uniq -c | sort -n | tail -5 | tr -s ' ' | cut -d ' ' -f3
+
+03-b-9000
+find ~ -type f -mmin -15 -printf "%h/%f %T+ \n" > eternity
+
+03-b-9050
+cp /srv/fmi-os/exercises/data/population.csv ~
+
+03-b-9051
+awk -F, 'BEGIN{sum=0} {if($3==2008) sum+=$4} END{print sum}' population.csv
+awk -F, 'BEGIN{sum=0} {if($3==2016) sum+=$4} END{print sum}' population.csv
+
+03-b-9052
+grep 'Bulgaria' population.csv | awk -F, '{if($4>pop) {year=$3; pop=$4}} END {print year}'
+
+03-b-9053
+(head -n1 && tail -n1) <  <(grep '.*2016,.*' population.csv | sed 's/, / /g' | awk -F, '{temp=$1; $1=$4; $4=temp; print $0}' | sort -n)
+
+03-b-9054
+grep '.*1969,.*' population.csv | sed 's/, / /g' | awk -F, '{temp=$1; $1=$4; $4=temp; print $0}' | sort -nr | sed -n '42p'
+
+03-b-9100
+curl -o songs.tar.gz "http://fangorn.uni-sofia.bg/misc/songs.tar.gz"
+
+03-b-9101
+gzip -d songs.tar.gz
+tar -xf songs.tar
+
+03-b-9102	
+find songs -type f -name '*.ogg' -printf "%f\n" | sed -E 's%.*- (.*)\(.*%\1%g
+
+03-b-9103—--------------------------bonus
+find . -type f -name '*.ogg' -printf "%p\n" | sed 's:./::g' | xargs -I @ bash -c 'mv -v '"'"'@'"'"' $(echo '"'"'@'"'"' | sed -r "s/(.)/\L\1/g" | sed "s/ /_/g")'
+//////////////////—--------real one
+find songs -type f -printf "%p\n" | tr -d "songs/" | cut -d "(" -f1 | cut -d '-' -f2 |tr A-Z a-z | tr ' ' "_" | sort
+
+03-b-9104
+find songs -type f -printf "%f\n" | cut -d '(' -f2 | cut -d ')' -f1 | awk -F, '{print $2", " $1}' | sort -nu
+
+03-b-9105
+find songs -type f -printf "%f\n" | egrep '(Beatles|Pink)' | awk '{print $0} END {print NR}' 
+//////
+find songs -type f -printf "%f\n" | egrep -c '((^Beatles -)|(^Pink -))'
+
+03-b-9106
+find songs -type f -name '*.ogg' -printf "%f\n" | cut -d '-' -f1 | sed 's/ //g' | sort -u | xargs -I @ mkdir songs/@
+
+03-b-9200
+(find /etc -type f -printf "%s %M %f\n" | sort -n | tail -1) 2> /dev/null | awk '{print $2}' | xargs -I @ grep "^@" <(ls -la)
+
+03-b-9300
+НЕ РАЗБИРАМ УСЛОВИЕТО
+
+03-b-9400*
+awk '{for(i=NF;i>0;i--) printf("%s ", $i); printf("\n")}' /srv/fmi-os/exercises/data/emp.data
+
+03-b-9500*
+tail -n +2 ssa-input.txt |awk '/Array/ {array = $2} /physicaldrive/ {drive=$2} /Current Temperature/ {temp=$NF} /Maximum Temperature/ {print array"-"drive, temp, $NF}'
