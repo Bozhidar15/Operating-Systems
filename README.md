@@ -2,7 +2,7 @@
 ## task and solutions of 
 - [02.commands](https://github.com/Bozhidar15/Operating-Systems/tree/main/02.commands)  
 - [03.pipes](https://github.com/Bozhidar15/Operating-Systems/tree/main/03.pipes)
-- 04.process
+- [04.process](https://github.com/Bozhidar15/Operating-Systems/tree/main/04.processes)
 - 05.scripts
 
 - collection of shell
