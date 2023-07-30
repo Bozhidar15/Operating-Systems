@@ -1,0 +1,45 @@
+04-a-5000
+ps -e –sort=start -o comm |tail 
+ps -eo comm --sort=start_time | head
+
+04-a-6000
+ps -e -o pid=,comm=,vsz= | sort -nr -k 3 | head -n 1 | tr -s ' ' | cut -d ' ' -f 1,2
+ps -eo comm,vsz --sort=-vsz | head  (по-добрия вариант -vsz -> от голямо към малко)
+ИЛИ
+ps -eo comm,vsz --sort=vsz | tail
+
+04-a-6300
+ps -e -o etimes,cmd | tail -2 |sort -n -k1 | tail -1 | tr -s ' '|cut -d' ' -f4
+ps -eo comm --sort=start_time | head -n 2 | tail -n 1
+
+04-b-5000
+ps -e -g root -o rss= | awk ‘{sum+=$1} END {print sum}’
+///////////////or
+sum=0; while read -d $’\n’ n; do sum=$((sum + n)); done < <(ps -e -g root -o rss=); echo”$(sum)”
+//////////////or
+ps -e -g root -o rss= | tr ‘\n’ ‘+’ | sed ‘s/$/0\n/’ | bc
+
+04-b-6100
+ps -e -o comm,user | grep '^vim ' | sort | uniq -c | awk '$1>=2 {print $3}'
+
+04-b-6200
+ps -e -o user= | sort | uniq > users_with_procs.txt
+who | awk '{ print $1 }' | sort | uniq > users_logged_in.txt
+comm -1 -3 users_logged_in.txt users_with_procs.txt
+////////////////or
+comm -1 -3 <(who | cut -d ' ' -f 1 | sort | uniq) <(ps -e -o user= | sort | uniq)
+///////////////or
+ps -e -o user= | grep -v -F -f <(who | cut -d' ' -f1) | sort | uniq
+
+04-b-7000
+while read line; do sum=$(($sum+$line)); done < <(ps -e -o rss -g root | tail -n +2)
+////////
+ps -e -o rss -g root |tail -n +2 | awk 'BEGIN{sum=0;count=0} {count+=1;sum+=$1} END{print sum/count}'
+
+04-b-8000
+ps -eo pid=,comm= | egrep -v "tty"  | sort | uniq
+
+04-b-9000
+ps -e -o pid,ppid | while read child parent; do child_cout=$(ps -e -o ppid=,pid= | \
+awk '{$1=="${child}" {print $2}}'|grep -E "^\s*${child}" | wc -l); parent_count=$(ps -e -o ppid=,pid | \
+grep -E "^\s*${parent}" | wc -l); if[$child_count -gt $parent_count]echo $child if i; 
