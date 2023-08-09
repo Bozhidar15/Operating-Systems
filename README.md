@@ -6,5 +6,5 @@
 - [05.scripts](https://github.com/Bozhidar15/Operating-Systems/tree/main/05.scripts)
   
 ###### Решените задачи от следващите 2 раздела са от файла os-problems.pdf (първото число представлява номера на задачата; второто годината, когато е дадена тази задача; третото на коя специалност; четвъртото колко пъти се е падала тази задача през годините; Да се обърне внимание, че файла os-problems.pdf е бил променян и първото число няма да съответва на задачата, затова да се гледат следващите 3 )
-- collection of shell
-- collection of C
+- [collection of shell](https://github.com/Bozhidar15/Operating-Systems/tree/main/CollectionOfShell)
+- [collection of C](https://github.com/Bozhidar15/Operating-Systems/tree/main/CollectionOfC)
