@@ -29,7 +29,7 @@ unalias {name} -> delete command
 add command permanently: add your code to this file : ~/.bash_profile || ~/.profile || ~/.bashrc || /etc/bashrc  
 
 
-#### shell commands (you can pass relative and absolute paths to the commands)  
+### shell commands (you can pass relative and absolute paths to the commands)  
 man {command} -> open information page of current entered command  
 pwd -> show current directory where I am  
 whoami -> return your username  
