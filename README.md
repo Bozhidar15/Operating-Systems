@@ -60,15 +60,15 @@ readlink {path} -> this will follow link
 df -> give free and used space of machine  
 
 GLOBBING:  
-'?' -> one random symbol  
-'*' -> wildcard (>=0 random symbols)  
+"?" -> one random symbol  
+"*" -> wildcard (>=0 random symbols)  
 
 example: touch {bar, foo}_{q, p} -> this will create bar_q, bar_p, foo_q, foo_p  
 find . -iname *.txt -> this will return all files ending on .txt no matter what is before it fmi.txt, car.txt, mouse.txt  
 
 xargs -> gives you the power to combine 2 command one after another(do not use it)  
 xxd {path} -> interprets the contents of the file by bytes  
-paste {path1} {path2} -> combine two files in parallel
+paste {path1} {path2} -> combine two files in parallel  
 less {path} -> you can read content of a file using man page controls  
 file {path} -> print information about given file  
 cal -> calendar  
@@ -77,10 +77,10 @@ tar -x -f(after this write the name of the archive) {name of the archive} -> unz
 example: tar -cf project.tar project  
 gzip {file} -> create compressed file.gz using DEFLATE algorithm  
 
-PIPES AND STREAMS: 
-{command1} > {file} -> result from command1 is saved to file(no need to be created in advance) 
-> -> override
->> -> append to file
+PIPES AND STREAMS:  
+{command1} > {file} -> result from command1 is saved to file(no need to be created in advance)  
+">" -> override  
+">>" -> append to file  
 
 1> -> only stdout   
 2> -> only stderr  
@@ -98,19 +98,19 @@ COMMAND SUBSTITUTION:
 $(commnad) -> open invisible new shell(with copied all variables and thir values) make the calculation and return only result of it  
 
 PROCESS SUBSTITUTION:  
->(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command
-<(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command
-examples:
-comm -2 -3 <(cat /etc/passwd | cut -d : -f 1 | sort) <(who |cut -d ' ' -f 1 | sort)
-whoami | read name
-echo "name: ${name}"
-name :
-WRONG!!!
+">(command)" -> this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command  
+"<(command)" -> this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command  
+examples:  
+comm -2 -3 <(cat /etc/passwd | cut -d : -f 1 | sort) <(who |cut -d ' ' -f 1 | sort)  
+whoami | read name  
+echo "name: ${name}"  
+name :  
+WRONG!!!  
 
-read name < <(whoami)
-echo "name: ${name}"
-name : ivan
-RIGHT!!!
+read name < <(whoami)  
+echo "name: ${name}"  
+name : ivan  
+RIGHT!!!  
 
 wc {path} -> returning number of differant things like words, lines, sybols, bytes ec. in given path to file  
 tr {Object1} {Object2} -> change object1 with object2(this command should take string from stdin)  
@@ -119,7 +119,7 @@ sort -> lexicographic sorting
 du -> size of all files  
 seq 1 5 -> number from 1 to 5  
 uniq -> take string and delete line if two adjacent rows are same.  
-comm {file1} {file2} -> print 3 columns. The first column is the unique words from the first file. Second with the second file and third column with the same words.  
+comm {file1} {file2} -> print 3 columns. The first column is the unique words from the first file. Second with the second file and third  column with the same words.  
 mktemp -> create temp file(have to delete it after your work is done)  
 cmp -> check if 2 files are equel  
 sha256sum -> make hash of file  
@@ -128,8 +128,8 @@ pwgen -> generate password
 set -> show all variables  
 examples: 
 {name of variable}={value}
-name="Ivan Ivanov"
-echo "my name is ${name}"
+name="Ivan Ivanov"  
+echo "my name is ${name}"  
 
 env -> show hole environtment variables table  
 export {name of variable}={value} -> for environment variables  
@@ -148,13 +148,13 @@ ${@}/${*} -> ALL PARAMETERS (SEE THE DIFFERANCE!)
 
 ${?} -> EXIT STATUS OF COMMAND BEFORE  
 ${!} -> PID OF PROCESS IN BACKGROUND MODE  
-which {commnad} -> shows where is this program(command) is located 
+which {commnad} -> shows where is this program(command) is located  
 bc -> string to in/double  and caluculate  
 ps -> show active process  
 top -> show information about active process in human readable way  
 wait {pid} -> wait process with given pid before continuing  
 grep {string} {path} -> search and print only lines in which string match  
-egrep == grep -e -> include regex (read regex(1))
+egrep == grep -e -> include regex (read regex(1))  
 
 REGEX:  
 \t -> tab  
@@ -163,20 +163,20 @@ REGEX:
 
 example:  
 grep 'ba..' -> match string 'ba' and two randomm symbols  
-anchors -> fixed positions:
-- $ -> end of a line
-- ^ -> star of line
-- \> -> end of word
-- \< -> start of word
-- \b -> start and end of word
+anchors -> fixed positions:  
+- $ -> end of a line  
+- ^ -> star of line  
+- \> -> end of word  
+- \< -> start of word  
+- \b -> start and end of word  
 
 [...] -> symbol class (This means one random symbol)  
-[^a-zA-Z] -> this means one random symbol without all small and big letters from a to z
+[^a-zA-Z] -> this means one random symbol without all small and big letters from a to z  
 \w -> if you use this in symbol class it means = a-zA-Z0-9  
-[:alnum] [:alpha] [:digit] [:cntrl] [:lower] [:space] [:upper:] 
+[:alnum] [:alpha] [:digit] [:cntrl] [:lower] [:space] [:upper:]  
 
 example:  
-grep -e '[[:alpha:]_.]' -> symbol which is letter, underscore or dot
+grep -e '[[:alpha:]_.]' -> symbol which is letter, underscore or dot  
 grep -e 'lift|elevator' -> catch lines with lift and with elevator (or)  
 operator () > operator |  
 
@@ -206,14 +206,14 @@ $1,$2,$3 .. -> exact column
 NF -> number of columns of current row  
 NR -> number of rows read by now  
 examples: 
-awk '$1 == "ivan"'
+awk '$1 == "ivan"'  
 awk '{print $2}' 
 
 vim -> editor  
 If you are in vim you can pause your vim process by pressing cntr + z 
 jobs -> shows all process in our session by numbers  
 fg {number} -> turn pause process to active by entering the number from jobs  
-vimtutor -> man page helper
+vimtutor -> man page helper  
 yy -> copy  
 p -> paste  
 w -> word forward  
