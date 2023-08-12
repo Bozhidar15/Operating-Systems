@@ -10,7 +10,7 @@
 - [collection of C](https://github.com/Bozhidar15/Operating-Systems/tree/main/CollectionOfC)
 
 ### general knowledge
-relative path -> path from one folder(not root) to the bottom
+relative path -> path from one folder(not root) to the bottom.
 absolute path -> path starting from root to the bottom
 . -> current directory (you can use this in commands)
 ~ -> your home directory (you can use this in commands)
