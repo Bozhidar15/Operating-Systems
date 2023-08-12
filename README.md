@@ -60,8 +60,8 @@ readlink {path} -> this will follow link
 df -> give free and used space of machine  
 
 GLOBBING:  
-? -> one random symbol  
-* -> wildcard (>=0 random symbols)  
+'?' -> one random symbol  
+'*' -> wildcard (>=0 random symbols)  
 
 example: touch {bar, foo}_{q, p} -> this will create bar_q, bar_p, foo_q, foo_p  
 find . -iname *.txt -> this will return all files ending on .txt no matter what is before it fmi.txt, car.txt, mouse.txt  
