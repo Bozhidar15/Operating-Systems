@@ -213,7 +213,9 @@ vim -> editor
 If you are in vim you can pause your vim process by pressing cntr + z 
 jobs -> shows all process in our session by numbers  
 fg {number} -> turn pause process to active by entering the number from jobs  
-vimtutor -> man page helper  
+vimtutor -> man page helper
+yy -> copy  
+p -> paste  
 w -> word forward  
 b -> word back  
 gg -> begin of file  
