@@ -60,8 +60,8 @@ readlink {path} -> this will follow link
 df -> give free and used space of machine  
 
 GLOBBING:  
-"?" -> one random symbol  
-"*" -> wildcard (>=0 random symbols)  
+{?} -> one random symbol  
+{*} -> wildcard (>=0 random symbols)  
 
 example: touch {bar, foo}_{q, p} -> this will create bar_q, bar_p, foo_q, foo_p  
 find . -iname *.txt -> this will return all files ending on .txt no matter what is before it fmi.txt, car.txt, mouse.txt  
@@ -79,8 +79,8 @@ gzip {file} -> create compressed file.gz using DEFLATE algorithm
 
 PIPES AND STREAMS:  
 {command1} > {file} -> result from command1 is saved to file(no need to be created in advance)  
-">" -> override  
-">>" -> append to file  
+{>} -> override  
+{>>} -> append to file  
 
 1> -> only stdout   
 2> -> only stderr  
@@ -98,8 +98,8 @@ COMMAND SUBSTITUTION:
 $(commnad) -> open invisible new shell(with copied all variables and thir values) make the calculation and return only result of it  
 
 PROCESS SUBSTITUTION:  
-">(command)" -> this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command  
-"<(command)" -> this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command  
+this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command  -> >(command)  
+this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command  -> <(command)  
 examples:  
 comm -2 -3 <(cat /etc/passwd | cut -d : -f 1 | sort) <(who |cut -d ' ' -f 1 | sort)  
 whoami | read name  
