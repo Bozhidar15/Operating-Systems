@@ -10,6 +10,7 @@
 - [collection of C](https://github.com/Bozhidar15/Operating-Systems/tree/main/CollectionOfC)
 
 ### general knowledge
+init -> program which start right after starting our operating system  
 relative path -> path from one folder(not root) to the bottom  
 absolute path -> path starting from root to the bottom  
 tmux new -> command which open tmux sessing and your tutor can control your shell. to exit just write logout  
@@ -22,6 +23,11 @@ sudo -> key command; DO NOT USE IF YOU DONT HAVE RIGHTS; give administration pow
 sudo {command} -> run current command from root  
 sudo -u {user} {command} -> run command from given user  
 Every command could user flags ( -r -s -f ....) in man page of a command you can find which flag do you need 
+chsh -> changing shell by default  
+alias {name}={command} -> creating your own command (alias home_usage="df -h ~ | awk 'NR>1{print $5}'" )  
+unalias {name} -> delete command  
+add command permanently: add your code to this file : ~/.bash_profile || ~/.profile || ~/.bashrc || /etc/bashrc  
+
 
 #### shell commands (you can pass relative and absolute paths to the commands)  
 man {command} -> open information page of current entered command  
@@ -87,6 +93,12 @@ examples:
 
 {command1} | {command2} -> stdout from command1 is stdin for command2 
 
+COMMAND SUBSTITUTION:  
+$(commnad) -> open invisible new shell(with copied all variables and thir values) make the calculation and return only result of it  
+
+PROCESS SUBSTITUTION:  
+>(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command
+<(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command
 
 wc {path} -> returning number of differant things like words, lines, sybols, bytes ec. in given path to file  
 tr {Object1} {Object2} -> change object1 with object2(this command should take string from stdin)  
@@ -95,6 +107,34 @@ sort -> lexicographic sorting
 du -> size of all files  
 uniq -> take string and delete line if two adjacent rows are same.  
 comm {file1} {file2} -> print 3 columns. The first column is the unique words from the first file. Second with the second file and third column with the same words.  
+set -> show all variables  
+examples: 
+{name of variable}={value}
+name="Ivan Ivanov"
+echo "my name is ${name}"
+
+env -> show hole environtment variables table  
+export {name of variable}={value} -> for environment variables  
+environment variables:  
+${SHELL} -> PATH TO THIS SHELL  
+${USER} -> USERNAME OF CURRENT USER  
+${HOME} -> HOME DIRECTORY OF CURRENT USER  
+${PS1} -> STRING WHICH YOU LOGIN (s0600..@astero)
+${PATH} -> PATH FOR SEARCHING COMMAND  
+${PWD} -> CURRENT DIRECTORY  
+${IFS} -> INTERNAL FIELD SEPARATOR  
+${EDITOR} -> EDITOR  
+${#} -> NUMBER OF PARAMETERS  
+${0} -> NAME OF THE CURRENT SCRIPT  
+${@}/${*} -> ALL PARAMETERS (SEE THE DIFFERANCE!)  
+
+${?} -> EXIT STATUS OF COMMAND BEFORE  
+${!} -> PID OF PROCESS IN BACKGROUND MODE  
+which {commnad} -> shows where is this program(command) is located 
+bc -> string to in/double  and caluculate  
+ps -> show active process  
+top -> show information about active process in human readable way  
+wait {pid} -> wait process with given pid before continuing  
 grep {string} {path} -> search and print only lines in which string match  
 egrep == grep -e -> include regex (read regex(1))
 
@@ -137,3 +177,30 @@ sed {string} -> like command tr but could use regex
 sed 's/quick/fast' -> s/ means change quick with fast one time in text  
 sed 's/AA/BB/g' -> /g means for all matches  
 sed could use differant separators  -> sed 's:AA:BB:g'  
+example with reversing of last two symbols:  
+sed -E 's/.*(.)(.$)/\2\1/g'  
+
+awk -> programming language  
+BEGIN{...}  
+END{...}  
+$0 -> current line  
+$1,$2,$3 .. -> exact column  
+NF -> number of columns of current row  
+NR -> number of rows read by now  
+examples: 
+awk '$1 == "ivan"'
+awk '{print $2}' 
+
+vim -> editor  
+If you are in vim you can pause your vim process by pressing cntr + z 
+jobs -> shows all process in our session by numbers  
+fg {number} -> turn pause process to active by entering the number from jobs  
+vimtutor -> man page helper  
+w -> word forward  
+b -> word back  
+gg -> begin of file  
+
+:w -> save changes  
+:q -> quit  
+:q! -> quit without save  
+:wq/:x -> save and quit  
