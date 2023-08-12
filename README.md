@@ -47,6 +47,7 @@ head {path} -> print first 10 rows of given file
 tail {path} -> print last 10 rows of given file  
 stat {path} -> show status or wanted features of a given file  
 chown {path} -> change owner of a file  
+chmod -> change file/directory access rights settings  
 find {path} (flags) -> powerful command, which you can use to find information about features of a directory or files  
 ln {new path} {old path} -> create link/pointer from one file  
 
@@ -99,14 +100,31 @@ $(commnad) -> open invisible new shell(with copied all variables and thir values
 PROCESS SUBSTITUTION:  
 >(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdin of command
 <(command) -> this is replaces with string, which is name of a virtual file representing pipe attached to stdout of command
+examples:
+comm -2 -3 <(cat /etc/passwd | cut -d : -f 1 | sort) <(who |cut -d ' ' -f 1 | sort)
+whoami | read name
+echo "name: ${name}"
+name :
+WRONG!!!
+
+read name < <(whoami)
+echo "name: ${name}"
+name : ivan
+RIGHT!!!
 
 wc {path} -> returning number of differant things like words, lines, sybols, bytes ec. in given path to file  
 tr {Object1} {Object2} -> change object1 with object2(this command should take string from stdin)  
 cut -> cutting table data  
 sort -> lexicographic sorting  
 du -> size of all files  
+seq 1 5 -> number from 1 to 5  
 uniq -> take string and delete line if two adjacent rows are same.  
 comm {file1} {file2} -> print 3 columns. The first column is the unique words from the first file. Second with the second file and third column with the same words.  
+mktemp -> create temp file(have to delete it after your work is done)  
+cmp -> check if 2 files are equel  
+sha256sum -> make hash of file  
+diff -> compare two files line by line  
+pwgen -> generate password  
 set -> show all variables  
 examples: 
 {name of variable}={value}
